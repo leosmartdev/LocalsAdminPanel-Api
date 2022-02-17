@@ -6,8 +6,7 @@ const BlockLimitedWordSchema = new mongoose.Schema({
     required: true
   },
   replacewith: {
-    type: String,
-    required: true
+    type: String
   }
 });
 

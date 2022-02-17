@@ -4,10 +4,12 @@ const {
   fetchBlockLimitedWords,
   addNewBlockLimitedWord,
   updateBlockLimitedWord,
+  deleteBlockLimitedWordById,
   deleteBlockLimitedWord
 } = require('../controllers/blocklimitedwords');
+const { verifyToken } = require('../middlewares/authHandler');
 
-router.route('/').get(fetchBlockLimitedWords).post(addNewBlockLimitedWord).put(updateBlockLimitedWord);
-router.route('/:id').delete(deleteBlockLimitedWord);
+router.route('/').get(verifyToken, fetchBlockLimitedWords).post(verifyToken, addNewBlockLimitedWord).put(verifyToken, updateBlockLimitedWord).delete(verifyToken, deleteBlockLimitedWord);
+router.route('/:id').delete(verifyToken, deleteBlockLimitedWordById);
 
 module.exports = router;

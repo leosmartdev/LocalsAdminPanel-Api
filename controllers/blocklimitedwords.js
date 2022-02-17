@@ -34,10 +34,18 @@ exports.updateBlockLimitedWord = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.deleteBlockLimitedWord = asyncHandler(async (req, res, next) => {
+exports.deleteBlockLimitedWordById = asyncHandler(async (req, res, next) => {
   await BlockLimitedWord.findByIdAndDelete(req.params.id);
   res.json({
     success: true,
-    message: 'Delete Successfull'
+    message: 'Delete Successfully'
   });
+});
+
+exports.deleteBlockLimitedWord = asyncHandler(async (req, res, next) => {
+  await BlockLimitedWord.findOneAndRemove({ word: req.body.word});
+  res.json({
+    success: true,
+    message: "Delete Successfully"
+  })
 });

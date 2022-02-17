@@ -26,7 +26,7 @@ exports.addNewProhibitedWord = asyncHandler(async (req, res, next) => {
 });
 
 exports.updateProhibitedWord = asyncHandler(async (req, res, next) => {
-  const prohibitedword = await ProhibitedWord.findOneAndUpdate({ word: req.query.word }, req.body);
+  const prohibitedword = await ProhibitedWord.findByIdAndUpdate(req.query.id, req.body);
 
   res.json({
     success: true,
@@ -34,11 +34,18 @@ exports.updateProhibitedWord = asyncHandler(async (req, res, next) => {
   });
 });
 
-
-exports.deleteProhibitedWord = asyncHandler(async (req, res, next) => {
+exports.deleteProhibitedWordById = asyncHandler(async (req, res, next) => {
   await ProhibitedWord.findByIdAndDelete(req.params.id);
   res.json({
     success: true,
-    message: "Delete Successfull"
+    message: "Delete Successfully"
+  })
+});
+
+exports.deleteProhibitedWord = asyncHandler(async (req, res, next) => {
+  await ProhibitedWord.findOneAndRemove({ word: req.body.word});
+  res.json({
+    success: true,
+    message: "Delete Successfully"
   })
 });
